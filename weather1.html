@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        img {
+            width: 100%;         /* Width screen ke hisaab se fit karega */
+            height: 200px;       /* Height ko chhota kar diya gaya hai */
+            margin-top: 15px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            object-fit: cover; 
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Weather Analysis</h2>
+
+    <input type="number" id="temperature" placeholder="Enter Temperature (°C)">
+    <input type="number" id="humidity" placeholder="Enter Humidity (%)">
+    <input type="number" id="rainfall" placeholder="Enter Rainfall (mm)">
+
+    <button onclick="analyzeWeather()">Analyze Weather</button>
+
+    <div id="result"></div>
+    <img id="weatherImage" src="" alt="Weather Image">
+
+    <script>
+        function analyzeWeather() {
+            const temp = parseFloat(document.getElementById("temperature").value);
+            const humidity = parseFloat(document.getElementById("humidity").value);
+            const rainfall = parseFloat(document.getElementById("rainfall").value);
+
+            let weather = "";
+            let imageSrc = "";
+
+            if (temp > 32 && humidity < 40 && rainfall < 10) {
+                weather = "Hot and Dry";
+                imageSrc = "C:/Users/Muskaan/Downloads/Hot & Dry.jpeg";
+            } else if (temp < 25 && humidity > 70 && rainfall < 10) {
+                weather = "Mostly Cloudy";
+                imageSrc = "C:/Users/Muskaan/Downloads/Mostly Cloudy.jpeg";
+            } else if (temp >= 25 && temp <= 32 && humidity >= 40 && humidity <= 70 && rainfall <= 30) {
+                weather = "Partly Cloudy";
+                imageSrc = "C:/Users/Muskaan/Downloads/Partly Cloudy.jpeg";
+            } else if (temp >= 20 && temp <= 30 && humidity > 80 && rainfall > 60) {
+                weather = "Showers";
+                imageSrc = "C:/Users/Muskaan/Downloads/Showers.jpeg";
+            } else if (temp < 25 && humidity > 85 && rainfall > 100) {
+                weather = "Heavy Rain";
+                imageSrc = "C:/Users/Muskaan/Downloads/Heavy Rain.jpeg";
+            } else if (temp < 15 && humidity < 40) {
+                weather = "Cold and Dry";
+                imageSrc = "C:/Users/Muskaan/Downloads/Cold & Dry.jpeg";
+            } else {
+                weather = "Moderate Weather";
+                imageSrc = "C:/Users/Muskaan/Downloads/Moderate Weather.jpeg";
+            }
+
+            document.getElementById("result").innerText = "Predicted Weather: " + weather;
+
+            const img = document.getElementById("weatherImage");
+            img.src = imageSrc;
+            img.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
